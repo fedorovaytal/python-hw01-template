@@ -1,5 +1,8 @@
 """
 Домашнее задание 1
+Перед выполнением нужно:
+1. создать виртуальное окружение
+2. установить в него библиотеки с помощью команды `pip install -r requirements.txt`
 """
 from pprint import pprint
 from typing import List, Dict
@@ -17,7 +20,7 @@ def func1(url: str = 'https://ru.wikipedia.org/') -> str:
 
 def func2(html_text: str) -> List[str]:
     """
-    Извлекает из HTML-кода текст
+    Извлекает из HTML-кода текст с помощью библиотеки BeautifulSoup
     :param html_text: HTML-код страницы
     :return: список слов извлечённых из страницы
     """
