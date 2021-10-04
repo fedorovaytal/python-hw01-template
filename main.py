@@ -10,8 +10,8 @@ from typing import List, Dict
 
 def func1(url: str = 'https://ru.wikipedia.org/') -> str:
     """
-    С помощью пакета requests скачавает страницу с сайта и возвращает её
-        HTML-код
+    С помощью пакета requests (https://docs.python-requests.org/en/latest/)
+        скачавает страницу с сайта и возвращает её HTML-код
     :param url: Адрес страницы, которую нужно скачать, по умолчанию:
         https://ru.wikipedia.org/
     :return: HTML-код страницы
@@ -21,6 +21,7 @@ def func1(url: str = 'https://ru.wikipedia.org/') -> str:
 def func2(html_text: str) -> List[str]:
     """
     Извлекает из HTML-кода текст с помощью библиотеки BeautifulSoup
+        (https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
     :param html_text: HTML-код страницы
     :return: список слов извлечённых из страницы
     """
