@@ -6,25 +6,38 @@
 """
 from pprint import pprint
 from typing import List, Dict
+import requests
+from bs4 import BeautifulSoup
+from collections import Counter
+
 
 
 def func1(url: str = 'https://ru.wikipedia.org/') -> str:
     """
-    С помощью пакета requests (https://docs.python-requests.org/en/latest/)
-        скачавает страницу с сайта и возвращает её HTML-код
+    С помощью пакета requests скачавает страницу с сайта и возвращает её
+        HTML-код
     :param url: Адрес страницы, которую нужно скачать, по умолчанию:
         https://ru.wikipedia.org/
     :return: HTML-код страницы
     """
+    x = requests.get(url).text
+    return x
 
 
 def func2(html_text: str) -> List[str]:
     """
     Извлекает из HTML-кода текст с помощью библиотеки BeautifulSoup
-        (https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
     :param html_text: HTML-код страницы
     :return: список слов извлечённых из страницы
     """
+    x = BeautifulSoup(html_text, features="html.parser").get_text().splitlines()
+    a = []
+    for i in x:
+        for j in i.split(' '):
+            if j != '':
+                a.append(j)
+    
+    return a
 
 
 def func3(words: List[str]) -> Dict[str, int]:
@@ -33,14 +46,26 @@ def func3(words: List[str]) -> Dict[str, int]:
     :param words: Список из слов с повторами
     :return: Словарь с количеством повторов слов
     """
+    freq = []
+    while words != []:
+        i = words[0]
+        count = 0
+        for j in words:
+            if i == j:
+                count += 1
+        for a in range(count):
+            words.remove(i)
+        freq.append((i, count))
 
+    return freq
 
 def main():
     """ Главная функция """
     html = func1()
     words = func2(html)
     freq = func3(words)
-    pprint(freq)
+    freq.sort(key = lambda x: (-x[1], x[0]))
+    print(freq)
 
 
 if __name__ == '__main__':
